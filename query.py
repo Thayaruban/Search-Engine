@@ -48,7 +48,7 @@ def wild_card_search(query):
     return q
 
 
-def multi_match(query, fields=['உருவகம்_1', 'உருவகம்_2', 'உருவகம்_3'], operator='or'):
+def multi_match(query,fields, operator='or'):
     q = {
         "query": {
             "multi_match": {
@@ -81,7 +81,14 @@ def process_query(query):
         if search_query[1] == "பாடல் வரிகள்":
             query_body = wild_card_search(search_query[0])
         elif search_query[1] == "உருவகம்":
-            query_body = multi_match(search_query[0])
+            query_body = multi_match(search_query[0],['உருவகம்_1', 'உருவகம்_2', 'உருவகம்_3'])
+        elif search_query[1] == "மூலம்":
+            query_body = multi_match(search_query[0],['மூலம்_1', 'மூலம்_2', 'மூலம்_3'])
+        elif search_query[1] == "மூலம்":
+            query_body = multi_match(search_query[0],['மூலம்_1', 'மூலம்_2', 'மூலம்_3'])
+        elif search_query[1] == "இலக்கு":
+            query_body = multi_match(search_query[0],['இலக்கு_1', 'இலக்கு_2', 'இலக்கு_3'])
+
         elif search_query[1] == "பாடகர்" or search_query[1] == "பாடகர்கள்":
             query_body = search_with_field(search_query[0], "பாடகர்கள்")
         else:
