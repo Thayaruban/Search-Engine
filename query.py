@@ -84,8 +84,6 @@ def process_query(query):
             query_body = multi_match(search_query[0])
         elif search_query[1] == "பாடகர்" or search_query[1] == "பாடகர்கள்":
             query_body = search_with_field(search_query[0], "பாடகர்கள்")
-        elif search_query[1] == "வருடம்":
-            query_body = search_with_field(search_query[0], "வருடம்")
         else:
             query_body = search_with_field(search_query[0],search_query[1])
 
