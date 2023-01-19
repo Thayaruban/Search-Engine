@@ -1,0 +1,67 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="s006">
+
+
+		{% if hits %}
+		<hgroup class="mb20">
+			<h1>Search Results</h1>
+			<h2 class="lead" id="results"><strong class="text-danger">{{ num_results }}</strong> results were found for the search for <strong class="text-danger">{{  query  }}</strong></h2>
+			<h2 class="lead" id="results"> About <strong class="text-danger">({{  time  }}ms)</strong></h2>
+		</hgroup>
+
+		<section id='song_section' class="col-md-8">
+			{% for hit in hits %}
+			<article class="search-result row">
+				<div class="col-md-12">
+					<h3><b>{{ hit._source.இயக்குனர் }}</b></h3>
+					<ul class="meta-search">
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Songs: {{ hit._source.பாடல்  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Singers: {{ hit._source.பாடகர்கள்  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Year: {{ hit._source['வருடம்']}}</span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Lyricist: {{ hit._source.பாடலாசிரியர்  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Lyrics: {{ hit._source['பாடல் வரிகள்']  }} </span></li>
+
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Metaphor 1: {{ hit._source['உருவகம்_1']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Source 1: {{ hit._source['மூலம்_1']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Target 1: {{ hit._source['இலக்கு_1']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Interpretation 1: {{ hit._source['விளக்கம்_1']  }} </span></li>
+						  {% if hit._source["உருவகம்_2"] %}
+						  <li><i class="glyphicon glyphicon-tags"></i> <span>Metaphor 2: {{ hit._source['உருவகம்_2']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Source 2: {{ hit._source['மூலம்_2']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Target 2: {{ hit._source['இலக்கு_2']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Interpretation 2: {{ hit._source['விளக்கம்_2']  }} </span></li>
+						{% endif %}
+						{%  if hit._source["உருவகம்_3"] %}
+						  <li><i class="glyphicon glyphicon-tags"></i> <span>Metaphor 3: {{ hit._source['உருவகம்_3']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Source 3: {{ hit._source['மூலம்_3']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Target 3: {{ hit._source['இலக்கு_3']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Interpretation 3: {{ hit._source['விளக்கம்_3']  }} </span></li>
+						{% endif %}
+
+					</ul>
+
+				</div>
+				<div class="col-md-6">
+
+				</div>
+				<span class="clearfix borda"></span>
+			</article>
+			{% endfor %}
+		</section>
+
+
+{% else %}
+			<section id='song_section' class="col-md-8">
+				<hgroup class="mb20">
+			<h1>Search Results</h1>
+			<h2 class="lead" id="results"><strong class="text-danger">No</strong> results were found for the search for <strong class="text-danger">{{  query  }}</strong></h2>
+
+		</hgroup>
+			</section>
+		{% endif %}
+
+
+	</div>
