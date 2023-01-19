@@ -28,7 +28,7 @@ def search_with_field(query, field):
     q = {
         "query": {
             "match": {
-                field: "query_string"
+                field: query
             }
         }
     }
@@ -96,6 +96,7 @@ def exact_search(query):
 
 
 def process_query(query):
+    # query based on our input
     if "?" in query:
         search_query = query.split('?')
         if search_query[1] == "பாடல் வரிகள்":
