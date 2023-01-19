@@ -62,27 +62,6 @@ def multi_match(query, fields=['உருவகம்_1', 'உருவகம்
     return q
 
 
-def search_by_year(gte, lte):
-    q = {
-        "query": {
-            "range": {
-                "வருடம்": {
-                    "gte": gte,
-                    "lte": lte
-                }
-            }
-        },
-        "sort": [
-            {
-                "வருடம்": {
-                    "order": "asc"
-                }
-            }
-        ]
-    }
-    return q
-
-
 def exact_search(query):
     q = {
         "query": {
@@ -100,23 +79,14 @@ def process_query(query):
     if "?" in query:
         search_query = query.split('?')
         if search_query[1] == "பாடல் வரிகள்":
-            print(1)
             query_body = wild_card_search(search_query[0])
         elif search_query[1] == "உருவகம்":
-            print(2)
             query_body = multi_match(search_query[0])
         elif search_query[1] == "பாடகர்" or search_query[1] == "பாடகர்கள்":
-
             query_body = search_with_field(search_query[0], "பாடகர்கள்")
-        elif search_query[-1] == "வருடம்":
-            print(4)
-            if "-" in search_query[0]:
-                fro, to = search_query[1].strip().split("-")
-                query_body = search_by_year(fro, to)
-            else:
-                query_body = search_with_field(search_query[0], "வருடம்")
+        elif search_query[1] == "வருடம்":
+            query_body = search_with_field(search_query[0], "வருடம்")
         else:
-
             query_body = search_with_field(search_query[0],search_query[1])
 
     elif '''"''' in query:
