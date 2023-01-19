@@ -39,7 +39,7 @@ def wild_card_search(query):
     q = {
         "query": {
             "wildcard": {
-                "பாடல் வரிகள்": {
+               "பாடல் வரிகள்": {
                     "value": query
                 }
             }
@@ -79,7 +79,7 @@ def process_query(query):
     if "?" in query:
         search_query = query.split('?')
         if search_query[1] == "பாடல் வரிகள்":
-            query_body = wild_card_search(search_query[0])
+            query_body = search_with_field(search_query[0],'பாடல் வரிகள்')
         elif search_query[1] == "உருவகம்":
             query_body = multi_match(search_query[0],['உருவகம்_1', 'உருவகம்_2', 'உருவகம்_3'])
         elif search_query[1] == "மூலம்":
@@ -95,15 +95,15 @@ def process_query(query):
             query_body = search_with_field(search_query[0],search_query[1])
 
     elif '''"''' in query:
-        print(6)
+
         query_body = exact_search(query)
 
     elif '*' in query:
-        print(7)
+
         query_body = wild_card_search(query)
 
     else:
-        print(8)
+
         query_body = basic_search(query)
     return query_body
 

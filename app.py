@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from query import search
-from elasticsearch_dsl import Index
+
 
 app = Flask(__name__)
 
